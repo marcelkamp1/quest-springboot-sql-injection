@@ -11,7 +11,7 @@ public class CreditCardController {
   private CreditCardRepository repository = new CreditCardRepository();
   
   @GetMapping("/customers/{identifier}/credit-cards")
-  String getAll(Model model, @PathVariable String identifier) {
+  String getAll(Model model, @PathVariable String identifier) throws Exception {
     model.addAttribute("creditCards", repository.findByCustomerIdentifier(identifier));
     return "customer_cards";
   }

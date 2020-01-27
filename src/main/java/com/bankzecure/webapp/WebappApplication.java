@@ -1,5 +1,6 @@
 package com.bankzecure.webapp;
 
+import org.owasp.esapi.codecs.MySQLCodec;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,13 @@ public class WebappApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(WebappApplication.class, args);
+		
+		MySQLCodec codec = new MySQLCodec(MySQLCodec.Mode.STANDARD);
+		String rawValue = "' OR 1=1 -- ;";
+		char[] immune = {};
+		
+		String escapedValue = codec.encode(immune, rawValue);
+		System.out.println(escapedValue);
   }
 
   @GetMapping("/")

@@ -1,12 +1,12 @@
 package com.bankzecure.webapp.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import com.bankzecure.webapp.repository.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.bankzecure.webapp.entity.Customer;
+import com.bankzecure.webapp.repository.CustomerRepository;
 
 @Controller
 public class CustomerController {
@@ -21,7 +21,7 @@ public class CustomerController {
   }
 
   @PostMapping("/customers/authenticate")
-  String login(Model model, @RequestParam String identifier, @RequestParam String password) {
+  String login(Model model, @RequestParam String identifier, @RequestParam String password) throws Exception {
     Customer customer = repository.findByIdentifierAndPassword(identifier, password);
     model.addAttribute("customer", customer);
     return "profile";
